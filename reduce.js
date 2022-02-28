@@ -7,13 +7,11 @@ Examples:
 */
 
 function extractValue(arr, key) {
-    let nameArr = [];
-    let value = arr.reduce(function(obj, nextValue){
-        return obj[key] += nextValue
-    })
-    console.log(value)
+   return arr.reduce(function(accum, nextValue){
+         accum.push(nextValue[key])
+         return accum
+    }, [])
 }
-
 /*
 Write a function called vowelCount which accepts a string and returns an object with the keys as the vowel and the values as the number of times the vowel appears in the string. This function should be case insensitive so a lowercase letter and uppercase letter should count
 
@@ -25,7 +23,20 @@ Examples:
     vowelCount('I Am awesome and so are you') // {i: 1, a: 4, e: 3, o: 3, u: 1};
 */
 
-function vowelCount(str) {}
+function vowelCount(str) {
+    let arr = str.split('')
+    return arr.reduce(function(accum,char){
+        let vowels = 'aeiou';
+        if(vowels.indexOf(char.toLowerCase()) !== -1){
+            if (accum[char]){
+                accum[char] ++
+            } else {
+                accum[char] = 1;
+            }
+        }
+        return accum
+    }, {})
+}
 
 /*
 Write a function called addKeyAndValue which accepts an array of objects and returns the array of objects passed to it with each object now including the key and value passed to the function.
